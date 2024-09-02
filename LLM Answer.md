@@ -34,7 +34,7 @@ Tokenizer 的作用是将输入的文本字符串转换为模型可以理解的�
 
 #### 2.2 Embedding 层
 
-Embedding 层将 token 的索引转换为向量，这些向量表示每个 token 的语义信息。
+Embedding 层将 token 的索引转换为向量，表示每个 token 的语义信息。
 
 #### 2.3 N × Transformer Block
 
