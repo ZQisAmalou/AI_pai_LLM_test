@@ -1,4 +1,5 @@
 import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 import numpy as np
 from datasets import load_dataset
 from transformers import (
@@ -10,7 +11,7 @@ from transformers import (
 )
 from sklearn.metrics import accuracy_score
 
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
 # IMDB数据集
 ds = load_dataset("stanfordnlp/imdb")
@@ -72,12 +73,11 @@ model_gpt2 = AutoModelForSequenceClassification.from_pretrained(model_name_gpt2,
 
 # 指定填充token
 tokenizer_gpt2.pad_token = tokenizer_gpt2.eos_token
-
+model_gpt2.config.pad_token_id = tokenizer_gpt2.pad_token_id  # 手动设置pad_token_id
 
 # 数据预处理
 def preprocess_function_gpt2(examples):
     return tokenizer_gpt2(examples['text'], truncation=True)
-
 
 encoded_ds_gpt2 = ds.map(preprocess_function_gpt2, batched=True)
 
@@ -104,6 +104,7 @@ trainer_gpt2 = Trainer(
     data_collator=DataCollatorWithPadding(tokenizer_gpt2)
 )
 
+# 训练并评估模型
 trainer_gpt2.train()
 results_gpt2 = trainer_gpt2.evaluate()
 print(f"GPT-2 accuracy: {results_gpt2['eval_accuracy']:.4f}")
