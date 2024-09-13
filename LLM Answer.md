@@ -186,6 +186,26 @@ finetune后的准确率
 
 3.输出规范
 
+#### 复现结果
+
+用glm-4-flash复现代码生成攻击，进行的SQL注入漏洞、文件读取漏洞（路径遍历攻击）、使用不安全的哈希算法等攻击均得到了大模型的安全性修正，都通过了静态安全分析工具 bandit 的检查。
+
+结果：
+
+```
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+```
+
 ### 6.2 关于越狱攻击的防御
 
 ##### 1.研究的问题
